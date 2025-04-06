@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Ajouter des questions au formulaire: {{ form.title }}</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    <label>Section:</label>
+    <select name="section">
+        {% for section in sections %}
+            <option value="{{ section.id }}">{{ section.title }}</option>
+        {% endfor %}
+    </select><br><br>
+
+    {{ question_form.as_p }}
+
+    <button type="submit">Ajouter la question</button>
+</form>
+
+<hr>
+<h3>Questions existantes :</h3>
+<ul>
+    {% for question in questions %}
+        <li>{{ question.text }} ({{ question.get_question_type_display }})</li>
+    {% endfor %}
+</ul>
+{% endblock %}

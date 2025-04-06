@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Submit Response</title>
+</head>
+<body>
+    <h1>Submit Your Response</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {% for question in questions %}
+            <label>{{ question.text }}</label><br>
+            {% if question.question_type == 'text' %}
+                <textarea name="response_{{ question.id }}" required></textarea>
+            {% elif question.question_type == 'radio' %}
+                {% for option in question.options.all %}
+                    <input type="radio" name="response_{{ question.id }}" value="{{ option.id }}" required> {{ option.value }}<br>
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+        <button type="submit">Submit Responses</button>
+    </form>
+</body>
+</html>

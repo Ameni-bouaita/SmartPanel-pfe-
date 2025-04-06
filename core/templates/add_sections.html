@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Ajouter des sections au formulaire: {{ form.title }}</h2>
+<form method="POST">
+    {% csrf_token %}
+    {{ section_form.as_p }}
+    <button type="submit">Ajouter la section</button>
+</form>
+
+<hr>
+<h3>Sections existantes :</h3>
+<ul>
+    {% for section in sections %}
+        <li>{{ section.title }} - {{ section.description }}</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'add_questions' form.id %}">Passer à l'ajout des questions</a>
+{% endblock %}

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Campaign</title>
+</head>
+<body>
+    <h1>Create a New Campaign</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create Campaign</button>
+    </form>
+    <a href="{% url 'campaign_list' %}">Back to Campaign List</a>
+</body>
+</html>
